@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  configureStore,
-  nanoid,
-} from "@reduxjs/toolkit";
+import { createSlice, configureStore, nanoid } from "@reduxjs/toolkit";
 
 const couterSlice = createSlice({
   name: "counter",
@@ -36,10 +32,8 @@ const todoSlice = createSlice({
 export const { increament, decrement } = couterSlice.actions;
 export const { add } = todoSlice.actions;
 
-
 const store = configureStore({
-  reducer: couterSlice.reducer,
-  reducer: todoSlice.reducer,
+  reducer: { counter: couterSlice.reducer, todo: todoSlice.reducer },
 });
 
 export default store;
