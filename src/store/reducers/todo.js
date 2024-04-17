@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = { todos: [], newTask: "", isLoading: false };
 
-export const fetchTodo = createAsyncThunk("todo/fetchTodos",async () => {
-      const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-      const data = await res.json()
+export const fetchTodo = createAsyncThunk("todo/fetchTodos", async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
 
-      return data
-    })
+  return data;
+});
 
 const todoSlice = createSlice({
   name: "todo",
@@ -29,16 +29,15 @@ const todoSlice = createSlice({
     },
   },
 
-  builder: {
-    [fetchTodo.pending]:(state)=>{
-      state.isLoading = true
-    },
-    [fetchTodo.fulfilled]: (state, actions)=>{
-      state.isLoading = false
-      state.todos = actions.payload
-      console.log(state)
-    }
-  }
+  extraReducers: (builder) => {
+    builder.addCase(fetchTodo.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchTodo.fulfilled, (state, actions) => {
+      state.isLoading = false;
+      state.todos = actions.payload;
+    });
+  },
 });
 
 export const { addTodo, setNewTask } = todoSlice.actions;
