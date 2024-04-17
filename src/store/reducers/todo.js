@@ -19,7 +19,7 @@ const todoSlice = createSlice({
       },
       prepare: (task) => {
         var id = nanoid();
-        return { payload: { id, task } };
+        return { payload: { id, title: task } };
       },
     },
 
@@ -31,6 +31,10 @@ const todoSlice = createSlice({
   extraReducers: {
     [fetchTodo.pending]:(state)=>{
       state.isLoading = true
+    },
+    [fetchTodo.fulfilled]: (state, actions)=>{
+      state.isLoading = false
+      state.todos = actions.payload
     }
   }
 });
