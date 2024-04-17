@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, setNewTask } from "../store/reducers/todo";
+import { addTodo, fetchTodo, setNewTask } from "../store/reducers/todo";
 
 const Todo = () => {
   const state = useSelector((state) => state.todo);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodo());
+  }, []);
 
   function handleAddTodo() {
     dispatch(addTodo(state.newTask));
@@ -21,7 +25,7 @@ const Todo = () => {
 
       <div>
         {state.todos.map((todo, idx) => (
-          <div key={idx}> {todo.task} </div>
+          <div key={idx}> {todo.title} </div>
         ))}
       </div>
     </div>
