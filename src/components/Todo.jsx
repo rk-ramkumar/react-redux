@@ -21,10 +21,11 @@ const Todo = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          marginBottom: "15px",
         }}
       >
         <input
-          style={{ flexGrow: "3" , height: "2rem"}}
+          style={{ flexGrow: "3", height: "2rem" }}
           placeholder="Enter your task..."
           value={state.newTask}
           onChange={({ target: { value } }) => dispatch(setNewTask(value))}
@@ -39,10 +40,10 @@ const Todo = () => {
               border: "2px solid red",
               marginBottom: "5px",
               padding: "10px",
+              display: "flex",
             }}
           >
-            {" "}
-            {todo.title}{" "}
+            <div style={{ flexGrow: "3" }}>{todo.title}</div>
           </div>
         ))}
       </div>
