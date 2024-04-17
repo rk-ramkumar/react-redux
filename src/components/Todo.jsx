@@ -16,16 +16,34 @@ const Todo = () => {
 
   return (
     <div>
-      <input
-        placeholder="Enter your task..."
-        value={state.newTask}
-        onChange={({ target: { value } }) => dispatch(setNewTask(value))}
-      />
-      <button onClick={handleAddTodo}>Add</button>
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <input
+          style={{ flexGrow: "3" , height: "2rem"}}
+          placeholder="Enter your task..."
+          value={state.newTask}
+          onChange={({ target: { value } }) => dispatch(setNewTask(value))}
+        />
+        <button onClick={handleAddTodo}>Add</button>
+      </div>
       <div>
         {state.todos.map((todo, idx) => (
-          <div key={idx}> {todo.title} </div>
+          <div
+            key={idx}
+            style={{
+              border: "2px solid red",
+              marginBottom: "5px",
+              padding: "10px",
+            }}
+          >
+            {" "}
+            {todo.title}{" "}
+          </div>
         ))}
       </div>
     </div>
