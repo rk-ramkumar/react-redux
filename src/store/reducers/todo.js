@@ -4,8 +4,9 @@ const initialState = { todos: [], newTask: "", isLoading: false };
 
 export const fetchTodo = createAsyncThunk("todo/fetchTodos",async () => {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+      const data = await res.json()
 
-      return res.json
+      return data
     })
 
 const todoSlice = createSlice({
@@ -28,13 +29,14 @@ const todoSlice = createSlice({
     },
   },
 
-  extraReducers: {
+  builder: {
     [fetchTodo.pending]:(state)=>{
       state.isLoading = true
     },
     [fetchTodo.fulfilled]: (state, actions)=>{
       state.isLoading = false
       state.todos = actions.payload
+      console.log(state)
     }
   }
 });
